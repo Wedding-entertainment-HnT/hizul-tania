@@ -4,7 +4,7 @@
 // ============================================================
 window.CONFIG = {
   // 1) URL Web App Apps Script (berakhiran /exec). WAJIB diisi.
-  apiUrl: 'GANTI_DENGAN_URL_WEB_APP_ANDA',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbwbYQKvy29-169nnCIxDt3eJJ-zD2O2YzL4mD7MXmQ9VV2LFHY_NBRlJUeqDUsggtqomw/exec',
 
   // 2) Acara
   judul: 'The Royal Wedding — Hizul & Tania',
@@ -14,7 +14,7 @@ window.CONFIG = {
   durasiJam: 4,
   tempat: 'Rumah Mempelai Wanita',
   alamat: 'Jl. Raya Pulo Bambu No.30, RT.2/RW.1, Karangbahagia, Kec. Karangbahagia, Kabupaten Bekasi, Jawa Barat',
-  mapsUrl: '',   // kosong = dibuat otomatis dari alamat. Atau isi link Google Maps.
+  mapsUrl: 'https://maps.app.goo.gl/XWN1Y38jw5JUT9Ky9',   // kosong = dibuat otomatis dari alamat. Atau isi link Google Maps.
   judulKalender: 'Pernikahan Hizul & Tania',
   detailKalender: 'Akad Nikah & Resepsi Hizul Wahyudin & Tania Renata. Mohon doa restu dan kehadiran Anda.',
   namaDefault: 'Tamu Undangan',
