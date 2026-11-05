@@ -1,0 +1,2 @@
+Taruh musik di folder ini dengan nama: musik.mp3
+Saran: MP3, di bawah 8 MB (potong bagian reff 2-3 menit, bitrate 128 kbps).

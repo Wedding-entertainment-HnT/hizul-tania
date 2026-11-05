@@ -1,0 +1,3 @@
+Taruh foto di folder ini dengan nama:
+hizul.jpg, tania.jpg, galeri-1.jpg sampai galeri-6.jpg
+Saran: JPG, sisi terpanjang 1200 px, ukuran di bawah 300 KB per foto.
