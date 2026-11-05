@@ -1844,15 +1844,16 @@ for(i=0;i<n;i++){
 @keyframes trName{0%{opacity:0;transform:scale(1.15);filter:blur(10px)}22%{opacity:1;transform:scale(1);filter:blur(0)}80%{opacity:1;filter:blur(0)}100%{opacity:0;transform:translateY(-14px);filter:blur(4px)}}
 
 /* burung merak */
-.tr-pk{position:absolute;bottom:-1vh;width:min(50vw,300px);z-index:4;pointer-events:none;will-change:transform,opacity}
-.tr-pk.l{left:calc(50% - min(50vw,300px) + 5vw)}
-.tr-pk.r{left:calc(50% - 5vw)}
+.tr-pk{--pkw:min(50vw,310px);position:absolute;bottom:-1vh;width:var(--pkw);z-index:4;pointer-events:none;will-change:transform,opacity}
+.tr-pk.l{left:calc(50% - var(--pkw) + 4vw)}
+.tr-pk.r{left:calc(50% - 4vw)}
 .tr-pk .in{transform-origin:50% 100%;opacity:0}
 .tr-pk.r .flip{transform:scaleX(-1)}
-.tr-pk svg{display:block;width:100%;height:auto;overflow:visible;transform-origin:50% 100%}
+.tr-pk img{display:block;width:100%;height:auto;transform-origin:50% 100%;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.5)) drop-shadow(0 0 20px rgba(233,200,90,.35))}
 #tr.play .tr-pk .in{animation:trPk 1.8s cubic-bezier(.16,.9,.25,1) 1s forwards}
-#tr.play .tr-pk svg{animation:trBreath 3.6s ease-in-out 2.8s infinite}
-.tr-pk.r svg{animation-delay:3.7s!important}
+#tr.play .tr-pk img{animation:trBreath 3.6s ease-in-out 2.8s infinite}
+.tr-pk.r img{animation-delay:3.7s!important}
 @keyframes trPk{0%{opacity:0;transform:translateY(30%) scale(.88)}100%{opacity:1;transform:none}}
 @keyframes trBreath{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.012)}}
 #tr.play .tr-pk.l{animation:trFlyL 2s cubic-bezier(.55,0,.3,1) 4.3s forwards}
@@ -2054,8 +2055,9 @@ function build(){
   if(built)return;built=true;
   var d=tr.querySelectorAll('.tr-door');
   d[0].innerHTML=doorSVG(7311,false);d[1].innerHTML=doorSVG(9137,true);
-  document.getElementById('pk-l').innerHTML=peacockSVG(31);
-  document.getElementById('pk-r').innerHTML=peacockSVG(47);
+  var PK=(window.CONFIG&&window.CONFIG.merak)||'assets/merak/merak.webp';
+  document.getElementById('pk-l').innerHTML='<img src="'+PK+'" alt="" draggable="false">';
+  document.getElementById('pk-r').innerHTML='<img src="'+PK+'" alt="" draggable="false">';
   /* nama diambil dari cover agar selalu sama */
   var nm=document.querySelectorAll('.names-cover .nm');
   if(nm.length>=2){document.getElementById('tr-n1').textContent=nm[0].textContent.trim();document.getElementById('tr-n2').textContent='& '+nm[1].textContent.trim()}
