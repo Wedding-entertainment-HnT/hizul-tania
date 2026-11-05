@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Check-in Tamu</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:linear-gradient(165deg,#fffaf0,#fdeef0 55%,#f6ead9);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;color:#3b2c16}
+.card{width:100%;max-width:440px;background:#fff;border:3px double #7a5a1e;border-radius:16px;padding:26px 20px;box-shadow:0 12px 34px rgba(70,50,20,.25);text-align:center}
+.lbl{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:#8c2f45;font-weight:700}
+h1{font-size:1.9rem;color:#6e1f33;margin:6px 0 10px;word-wrap:break-word;line-height:1.25}
+p{margin:6px 0;line-height:1.5;font-size:1.1rem}
+.warn{background:#b3261e;color:#fff;border-radius:12px;padding:14px;margin:14px 0;font-weight:700}
+label{display:block;text-align:left;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#6e1f33;font-weight:700;margin:16px 0 6px}
+input{width:100%;padding:14px;font-size:20px;border:2px solid #7a5a1e;border-radius:10px;font-family:inherit;color:#3b2c16}
+button{width:100%;margin-top:20px;padding:16px;font-size:1.15rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(135deg,#a63a55,#6e1f33);color:#fff4dc;box-shadow:0 4px 0 #4a0f26}
+button:disabled{opacity:.55}
+#msg{margin-top:16px;font-weight:700;border-radius:12px}
+#msg:empty{display:none}
+#msg.ok{background:#1b7a3a;color:#fff;padding:16px;font-size:1.3rem}
+#msg.bad{background:#b3261e;color:#fff;padding:16px}
+</style></head><body>
+<div class="card" id="card"><p>Memuat...</p></div>
+<script src="config.js"></script>
+<script>
+(function(){
+var API=(window.UNDANGAN||{}).apiUrl,card=document.getElementById('card');
+var p=new URLSearchParams(location.search),nama=p.get('cek')||'',kode=p.get('k')||'';
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function gagal(m){card.innerHTML='';card.appendChild(el('h1','','QR tidak valid'));card.appendChild(el('p','',m))}
+if(!API||!nama)return gagal('Alamat API belum diatur atau QR tidak lengkap.');
+fetch(API+'?aksi=cek&cek='+encodeURIComponent(nama)+'&k='+encodeURIComponent(kode)).then(function(r){return r.json()}).then(function(d){
+  if(!d.valid)return gagal(d.pesan||'QR tidak valid.');
+  card.innerHTML='';
+  card.appendChild(el('div','lbl','Tamu Undangan'));card.appendChild(el('h1','',d.nama));
+  card.appendChild(el('p','',d.rsvp?('RSVP: '+d.rsvp.status+' · '+d.rsvp.jumlah+' orang'):'Belum mengisi RSVP'));
+  if(d.sudah)card.appendChild(el('div','warn','Sudah check-in pada '+d.sudah));
+  card.appendChild(el('label','','Jumlah yang datang'));
+  var j=el('input');j.type='number';j.min=1;j.max=20;j.value=d.rsvp?d.rsvp.jumlah:1;card.appendChild(j);
+  card.appendChild(el('label','','PIN petugas'));
+  var pin=el('input');pin.type='password';pin.setAttribute('inputmode','numeric');card.appendChild(pin);
+  var go=el('button','','Tandai Hadir');go.type='button';card.appendChild(go);
+  var msg=el('div');msg.id='msg';card.appendChild(msg);
+  go.onclick=function(){
+    if(!pin.value){msg.className='bad';msg.textContent='Masukkan PIN petugas.';return}
+    go.disabled=true;msg.className='';msg.textContent='Memproses...';
+    fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:'tandaiHadir',args:[nama,kode,pin.value,j.value]})})
+      .then(function(r){return r.json()}).then(function(r){msg.className=r.success?'ok':'bad';msg.textContent=r.message;go.disabled=!!r.success})
+      .catch(function(){msg.className='bad';msg.textContent='Gagal terhubung. Coba lagi.';go.disabled=false});
+  };
+}).catch(function(){gagal('Gagal terhubung ke server.')});
+})();
+</script></body></html>
