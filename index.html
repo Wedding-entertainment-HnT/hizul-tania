@@ -1091,6 +1091,14 @@ window.addEventListener('scroll',function(){if(tk)return;tk=true;requestAnimatio
   background:radial-gradient(circle at 50% 45%,#5a1a2e 0%,#2a0c17 58%,#120508 100%)}
 #film.show{display:block}
 #film.vis{opacity:1}
+/* slide foto sebagai latar film Bismillah */
+#film-slides{position:absolute;top:0;right:0;bottom:0;left:0;z-index:0;overflow:hidden;background:#120508}
+.fslide{position:absolute;top:0;right:0;bottom:0;left:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;will-change:opacity,transform}
+.fslide.on{opacity:1}
+.fslide.kb{animation:fKb 6s ease-out forwards}
+@keyframes fKb{from{transform:scale(1.02)}to{transform:scale(1.13)}}
+#film-slides::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;
+  background:radial-gradient(circle at 50% 50%,rgba(18,5,8,.38) 0%,rgba(18,5,8,.62) 100%)}
 .film-rays{position:absolute;top:-30%;right:-30%;bottom:-30%;left:-30%;pointer-events:none;
   background:repeating-conic-gradient(from 0deg,rgba(233,200,90,.10) 0 4deg,transparent 4deg 14deg);
   -webkit-mask-image:radial-gradient(circle,#000 10%,transparent 62%);mask-image:radial-gradient(circle,#000 10%,transparent 62%);animation:spinSlow 70s linear infinite}
@@ -1271,6 +1279,7 @@ body{background:linear-gradient(165deg,#fffaf0 0%,#fdeef0 52%,#f6ead9 100%) fixe
 
 <!-- ═════════ FILM PEMBUKA ═════════ -->
 <div id="film" aria-hidden="true">
+  <div id="film-slides"></div>
   <div class="film-rays"></div>
   <div id="film-stars"></div>
   <div class="film-bar top"></div><div class="film-bar bot"></div>
@@ -1387,11 +1396,39 @@ function sky(n){
 
 /* ---------- 5. film pembuka ---------- */
 var film=$('#film'),filmStarted=false,filmEnded=false,filmTimer=null;
+/* slide foto latar film: memakai config.js > filmFoto (jika diisi), kalau tidak memakai galeri */
+var slideTimer=null,slideIdx=0,slideEls=[],slideList=[];
+(function preloadSlides(){
+  var C=window.CONFIG||{},src=((C.filmFoto&&C.filmFoto.length)?C.filmFoto:(C.galeri||[])).slice(0,6),res=[],left=src.length;
+  if(!left)return;
+  src.forEach(function(u,i){var im=new Image();
+    im.onload=function(){res[i]=u;if(!--left)slideList=res.filter(Boolean)};
+    im.onerror=function(){if(!--left)slideList=res.filter(Boolean)};
+    im.src=u});
+})();
+function showSlide(i){
+  if(!slideEls.length)return;
+  var prev=slideEls[slideIdx],cur=slideEls[i];
+  if(prev&&prev!==cur)prev.classList.remove('on');
+  cur.classList.remove('kb');void cur.offsetWidth;cur.classList.add('on','kb');
+  slideIdx=i;
+}
+function startSlides(){
+  var box=document.getElementById('film-slides');if(!box||slideEls.length||!slideList.length)return;
+  slideList.forEach(function(u){var d=document.createElement('div');d.className='fslide';d.style.backgroundImage='url("'+u+'")';box.appendChild(d);slideEls.push(d)});
+  slideIdx=0;showSlide(0);
+  if(slideEls.length>1)slideTimer=setInterval(function(){showSlide((slideIdx+1)%slideEls.length)},2800);
+}
+function stopSlides(){
+  clearInterval(slideTimer);slideTimer=null;
+  var box=document.getElementById('film-slides');if(box)box.innerHTML='';
+  slideEls=[];
+}
 function endFilm(){
   if(filmEnded)return;filmEnded=true;clearTimeout(filmTimer);
   film.classList.remove('vis');
   setTimeout(function(){
-    film.classList.remove('show','play');
+    film.classList.remove('show','play');stopSlides();
     try{document.body.style.overflow=''}catch(e){}
     try{window.scrollTo(0,0)}catch(e){}
     sky(3);
@@ -1399,7 +1436,7 @@ function endFilm(){
 }
 function startFilm(){
   if(filmStarted||reduce||!film)return;filmStarted=true;
-  film.classList.add('show');
+  film.classList.add('show');startSlides();
   try{document.body.style.overflow='hidden'}catch(e){}
   requestAnimationFrame(function(){requestAnimationFrame(function(){film.classList.add('vis','play')})});
   filmTimer=setTimeout(endFilm,12600);
