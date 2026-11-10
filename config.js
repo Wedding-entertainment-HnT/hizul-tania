@@ -46,6 +46,7 @@ window.CONFIG = {
     'assets/foto/galeri-5.jpg',
     'assets/foto/galeri-6.jpg'
   ],
+  filmFoto: ['assets/foto/hizul.jpg','assets/foto/galeri-2.jpg','assets/foto/tania.jpg','assets/foto/galeri-5.jpg'],
   merak: 'assets/merak/merak.webp',
   musik: 'assets/musik/musik.mp3'   // kosongkan '' bila tanpa musik
 };
