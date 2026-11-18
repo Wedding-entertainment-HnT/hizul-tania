@@ -1,196 +1,106 @@
-/* A quieter, more editorial finish for the wedding invitation. */
-:root {
-  --ink: #342f28;
-  --ink2: #665c4d;
-  --gold: #b69a62;
-  --gold2: #d7c49b;
-  --goldd: #806b45;
-  --line: #b9aa8d;
+/* Mandiri-inspired debit-card treatment for the wedding gift account. */
+.bank-card {
+  isolation: isolate;
+  width: min(100%, 430px);
+  min-height: 250px;
+  margin: 12px auto 0;
+  padding: 27px 25px 22px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 100% 100%, rgba(245,145,35,.95) 0 2%, transparent 2.4% 5%, rgba(245,145,35,.72) 5.2% 5.7%, transparent 6% 9%, rgba(245,145,35,.45) 9.2% 9.7%, transparent 10%),
+    radial-gradient(ellipse at 108% 110%, transparent 0 30%, rgba(55,164,217,.56) 30.3% 30.8%, transparent 31% 35%, rgba(64,174,221,.34) 35.3% 35.8%, transparent 36%),
+    linear-gradient(132deg, #0879b8 0%, #075b99 43%, #064579 100%);
+  box-shadow: 0 18px 38px rgba(11,54,86,.23), inset 0 1px 0 rgba(255,255,255,.28);
 }
-
-html { scroll-behavior: smooth; }
-body {
-  color: var(--ink);
-  background: #f7f4ed;
-  background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.92), transparent 58%),
-    linear-gradient(180deg, #f8f6f0 0%, #f1eee6 100%);
-  background-attachment: fixed;
+.bank-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 91px;
+  left: 25px;
+  width: 42px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 31%, rgba(25,65,87,.3) 32% 34%, transparent 35% 65%, rgba(25,65,87,.3) 66% 68%, transparent 69%),
+    linear-gradient(0deg, transparent 45%, rgba(25,65,87,.3) 46% 49%, transparent 50% 54%, rgba(25,65,87,.3) 55% 58%, transparent 59%),
+    linear-gradient(135deg, #e6d9a8, #bba76f 52%, #e8ddb4);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.45);
 }
-
-/* Keep the invitation romantic, but let the real photographs and words lead. */
-#glow .orb { opacity: .14; filter: blur(55px); animation: none; }
-#gold-dust, .royal-ornament, .crown-deco, .sparkle-deco,
-.firework-ring, .royal-heart, #main-doves { display: none !important; }
-#pframe { opacity: .42; }
-.pcw svg { filter: none; }
-.pf-s { opacity: .38; }
-
-#cover {
-  background: radial-gradient(ellipse at 50% 38%, #fffefa 0%, #f8f4ec 72%, #eee8dc 100%);
-}
-.cv-ring { animation: none; }
-.cv-disc {
-  background: radial-gradient(circle at 50% 28%, #fffefa 0%, #fbf8f1 72%, #f3eee4 100%);
-  box-shadow: 0 18px 55px rgba(66, 54, 37, .13), inset 0 0 0 1px rgba(182,154,98,.12);
-}
-.cv-rings .rg { animation: none; }
-.cv-rings ellipse, .cv-rings circle { stroke: rgba(128,107,69,.42); }
-.cv-sub { color: #766b5b; letter-spacing: .24em; }
-.names-cover { color: #34372f; }
-.names-cover .amp { color: #9c8060; }
-.tagline { color: #777064; letter-spacing: .12em; }
-.guest-box {
-  background: rgba(255,255,255,.68);
-  border-color: rgba(182,154,98,.38);
-  box-shadow: 0 5px 18px rgba(66,54,37,.06);
-}
-.guest-box::after { display: none; }
-.guest-label { color: #817353; }
-.btn-open {
-  border: 1px solid #9c8152;
-  background: linear-gradient(135deg, #74664d, #4e5143);
-  color: #fffdf7;
-  box-shadow: 0 7px 18px rgba(52,47,40,.16);
-  animation: fadeUp 1.4s ease-out 2.6s both;
-}
-.btn-open:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(52,47,40,.2); }
-#gold-curtain .panel {
-  background: linear-gradient(90deg, #e8e0d0, #f8f4eb 48%, #e8e0d0);
-  box-shadow: none;
-}
-#gold-curtain .panel.left { background: linear-gradient(90deg, #d9cfbb, #f4efe5); }
-#gold-curtain .panel.right { background: linear-gradient(270deg, #d9cfbb, #f4efe5); }
-#gold-curtain .panel::after { display: none; }
-#gold-curtain .seal {
-  background: #f8f4eb;
-  color: #665c4d;
-  border: 1px solid rgba(128,107,69,.35);
-  box-shadow: 0 8px 26px rgba(52,47,40,.12);
-  animation: crownReveal 1s ease-out;
-}
-#gold-curtain .seal::before, #gold-curtain .seal::after { display: none; }
-
-#main { color: var(--ink); }
-section { max-width: 780px; padding-top: clamp(30px, 6vw, 52px); padding-bottom: clamp(30px, 6vw, 52px); }
-.section-frame {
-  overflow: visible;
-  border: 1px solid rgba(128,107,69,.25);
-  border-radius: 4px;
-  background: rgba(255,254,250,.94);
-  box-shadow: 0 12px 35px rgba(57,49,37,.055);
+.bank-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 105% 110%, transparent 0 42%, rgba(255,255,255,.12) 42.2% 42.7%, transparent 43% 47%, rgba(255,255,255,.1) 47.2% 47.7%, transparent 48%),
+    linear-gradient(115deg, transparent 30%, rgba(255,255,255,.06) 52%, transparent 70%);
+  transform: none;
   animation: none;
 }
-.section-frame::before, .section-frame::after { display: none; }
-.section-title {
-  background: none;
-  color: #6f6045;
-  -webkit-text-fill-color: currentColor;
-  filter: none;
-  animation: none;
-  font-size: clamp(2rem, 7vw, 2.65rem);
+.bank-card > * { position: relative; z-index: 1; }
+.bank-card .bank-logo {
+  align-self: flex-end;
+  margin: 0 0 25px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: none;
 }
-.section-sub { color: #8a7959; letter-spacing: .12em; }
-.dv { opacity: .65; }
-
-.couple-card, .event-card, .story-book, .bank-card {
-  border: 1px solid rgba(128,107,69,.24);
-  border-radius: 5px;
-  background: #fffefa;
-  box-shadow: 0 8px 24px rgba(57,49,37,.065);
+.bank-card .bank-logo span::before {
+  content: "◆";
+  display: inline-block;
+  margin-right: 7px;
+  color: #f59b27;
+  font-size: .9em;
+  transform: scaleX(1.2) rotate(45deg);
 }
-.couple-card { padding: 24px 18px; }
-.couple-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(57,49,37,.1); }
-.photo-wrap {
-  padding: 4px;
-  background: conic-gradient(#e9dfc9, #b69a62, #eee6d4, #b69a62, #e9dfc9);
-  box-shadow: 0 5px 18px rgba(57,49,37,.12);
-  animation: none;
-}
-.photo-wrap::before { border: 1px solid rgba(182,154,98,.42); animation: none; }
-.photo-inner { background: #eee9df; }
-.photo-inner img { display: block; }
-.couple-role, .story-chapter, .bank-logo { color: #8a7959; }
-.couple-name, .event-day, .story-title { color: #6f6045; }
-.ampersand { color: #ad9466; text-shadow: none; animation: none; }
-.event-card { padding: 26px 18px; }
-.event-row { color: #514a3e; }
-.count-item {
-  background: #f8f5ed;
-  border: 1px solid #ded2b8;
-  border-radius: 4px;
-  box-shadow: none;
-}
-.count-num { color: #66583e; }
-.count-label { color: #827454; }
-.btn {
-  border-color: #b9a57c;
-  border-radius: 3px;
-  color: #66583e;
-  background: #fffefa;
+.bank-card .bank-num {
+  margin: 18px 0 7px;
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-size: clamp(1.18rem, 5vw, 1.55rem);
+  font-weight: 700;
   letter-spacing: .08em;
-  transition: background-color .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
-.btn-gold {
-  color: #fffdf7;
-  border-color: #6b6957;
-  background: linear-gradient(135deg, #77745f, #555849);
-  box-shadow: 0 4px 10px rgba(52,47,40,.12);
+.bank-card .bank-holder {
+  margin: 0 0 15px;
+  color: rgba(255,255,255,.85);
+  font-family: Arial, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
-.btn-gold:hover { background: #484c40; transform: translateY(-1px); box-shadow: 0 7px 16px rgba(52,47,40,.15); }
-.form-group label { color: #817353; }
-.form-group input, .form-group select, .form-group textarea {
-  border: 1px solid #d8d0c0;
-  border-radius: 3px;
-  background-color: #fffefa;
+.bank-card .btn {
+  align-self: stretch;
+  min-height: 42px;
+  color: #124e78;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 6px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 4px 12px rgba(0,25,48,.15);
+  font-family: Arial, sans-serif;
+  font-size: .88rem;
+  letter-spacing: .04em;
 }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  border-color: #9c8965;
-  box-shadow: 0 0 0 3px rgba(182,154,98,.13);
-}
-.gallery-grid { gap: 14px; }
-.gallery-item {
-  border: 4px solid #fffefa;
-  outline: 1px solid rgba(128,107,69,.23);
-  border-radius: 3px;
-  box-shadow: 0 7px 18px rgba(57,49,37,.1);
-}
-.gallery-item:hover { transform: translateY(-3px); }
-.gallery-item::before { display: none; }
-.gallery-item img { filter: saturate(.92); }
-#lightbox { background: rgba(30,29,25,.94); }
-#lightbox img { border: 1px solid rgba(255,255,255,.6); border-radius: 2px; box-shadow: 0 18px 55px rgba(0,0,0,.35); }
-#lightbox .close { color: #fffefa; }
-#music {
-  background: #5b5d4c;
-  color: #fffefa;
-  box-shadow: 0 5px 16px rgba(52,47,40,.2);
-}
-#music::before { animation: none; border-color: rgba(255,255,255,.3); }
-#scroll-bar { height: 2px; background: #a48c60; box-shadow: none; }
-
-/* Motion is used as a quiet entrance cue, not as constant decoration. */
-.reveal { transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.3,1); }
-.reveal.active .couple-card:nth-child(1),
-.reveal.active .couple-card:nth-child(3),
-.reveal.active .event-card,
-.reveal.active .bank-card,
-.reveal.active .count-item,
-.reveal.active .gallery-item { animation: none; }
-.reveal.active .section-sub, .reveal.active p.lead, .reveal.active .translation,
-.reveal.active .arabic, .reveal.active .story-item { animation: none; }
-.petal { opacity: .3; }
-.ring-row { filter: grayscale(.45); opacity: .72; animation: none; }
-
-@media (max-width: 700px) {
-  #pframe { opacity: .28; }
-  section { padding-left: 22px; padding-right: 22px; }
-  .section-frame { padding-left: 16px; padding-right: 16px; }
-  .couple-card:hover, .gallery-item:hover { transform: none; }
-  .btn { padding: 11px 20px; }
-  .petal { opacity: .2; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+.bank-card .btn:hover { background: #fff; transform: translateY(-1px); }
+@media (max-width: 480px) {
+  .bank-card { min-height: 235px; padding: 22px 19px 18px; border-radius: 15px; }
+  .bank-card::before { top: 83px; left: 19px; }
+  .bank-card .bank-logo { margin-bottom: 20px; }
+  .bank-card .bank-num { margin-top: 16px; }
 }
